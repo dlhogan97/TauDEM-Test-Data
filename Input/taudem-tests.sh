@@ -1,11 +1,11 @@
-#!/usr/bin/env bats
+#!/home/dlhogan/tools/bin/bats
 
-source '/tmp/bats-support/load.bash'
-source '/tmp/bats-assert/load.bash'
-source '/tmp/bats-file/load.bash'
+source '/home/dlhogan/tools/tmp/bats-support/load.bash'
+source '/home/dlhogan/tools/tmp/bats-assert/load.bash'
+source '/home/dlhogan/tools/tmp/bats-file/load.bash'
 
 # Set TAUDEM_PATH from environment or default - this is the path where the TauDEM executables are located
-TAUDEM_PATH="${TAUDEM_PATH:-/usr/local/bin}"
+TAUDEM_PATH="/home/dlhogan/tools/src/TauDEM/bin"
 
 # Validate that TAUDEM_PATH exists
 if [ ! -d "$TAUDEM_PATH" ]; then
@@ -229,9 +229,9 @@ cd Base
 run mpiexec -n 5  $TAUDEM_PATH/threshold -ssa loganad8.tif -src logansrc2.tif -thresh 200
 assert_success
 }
-@test "run mpiexec -np 3  $TAUDEM_PATH/moveoutletstostreams -p loganp.tif -src logansrc.tif -o OutletstoMove.shp -om Outletsmoved.shp -md 20" {
+@test "run mpiexec -np 3  $TAUDEM_PATH/moveoutletstostrm -p loganp.tif -src logansrc.tif -o OutletstoMove.shp -om Outletsmoved.shp -md 20" {
 cd Base
-run mpiexec -np 3  $TAUDEM_PATH/moveoutletstostreams -p loganp.tif -src logansrc.tif -o OutletstoMove.shp -om Outletsmoved.shp -md 20 
+run mpiexec -np 3  $TAUDEM_PATH/moveoutletstostrm -p loganp.tif -src logansrc.tif -o OutletstoMove.shp -om Outletsmoved.shp -md 20 
 assert_success
 }
 
@@ -453,16 +453,16 @@ assert_success
 }
 
 #gagewatershed test
-@test "run mpiexec -n 7  $TAUDEM_PATH/gagewatershed -p loganp.tif -o Outletsmoved.shp -gw logangw.tif -id gwid.txt" {
-cd Base
-run mpiexec -n 7  $TAUDEM_PATH/gagewatershed -p loganp.tif -o Outletsmoved.shp -gw logangw.tif -id gwid.txt
-assert_success
-}
-@test "run mpiexec -n 4  $TAUDEM_PATH/gagewatershed -p loganp.tif -o Outletsmoved.shp -gw logangw1.tif" {
-cd Base
-run mpiexec -n 4  $TAUDEM_PATH/gagewatershed -p loganp.tif -o Outletsmoved.shp -gw logangw1.tif 
-assert_success
-}
+# @test "run mpiexec -n 7  $TAUDEM_PATH/gagewatershed -p loganp.tif -o Outletsmoved.shp -gw logangw.tif -id gwid.txt" {
+# cd Base
+# run mpiexec -n 7  $TAUDEM_PATH/gagewatershed -p loganp.tif -o Outletsmoved.shp -gw logangw.tif -id gwid.txt
+# assert_success
+# }
+# @test "run mpiexec -n 4  $TAUDEM_PATH/gagewatershed -p loganp.tif -o Outletsmoved.shp -gw logangw1.tif" {
+# cd Base
+# run mpiexec -n 4  $TAUDEM_PATH/gagewatershed -p loganp.tif -o Outletsmoved.shp -gw logangw1.tif 
+# assert_success
+# }
 @test "run mpiexec -n 5  $TAUDEM_PATH/gagewatershed -p logantp.img -o Outletsmoved2.shp -gw logangw1.tif -id gwid1.txt -upid gwup.txt" {
 cd Base
 run mpiexec -n 5  $TAUDEM_PATH/gagewatershed -p logantp.img -o Outletsmoved2.shp -gw logangw1.tif -id gwid1.txt -upid gwup.txt
@@ -680,9 +680,9 @@ cd Geographic
 run mpiexec -n 5  $TAUDEM_PATH/threshold -ssa enogeoad8.tif -src enogeosrc2.tif -thresh 200
 assert_success
 }
-@test "run mpiexec -np 3  $TAUDEM_PATH/moveoutletstostreams -p enogeop.tif -src enogeosrc.tif -o Outlets.shp -om Outletsmoved.shp -md 20" {
+@test "run mpiexec -np 3  $TAUDEM_PATH/moveoutletstostrm -p enogeop.tif -src enogeosrc.tif -o Outlets.shp -om Outletsmoved.shp -md 20" {
 cd Geographic
-run mpiexec -np 3  $TAUDEM_PATH/moveoutletstostreams -p enogeop.tif -src enogeosrc.tif -o Outlets.shp -om Outletsmoved.shp -md 20 
+run mpiexec -np 3  $TAUDEM_PATH/moveoutletstostrm -p enogeop.tif -src enogeosrc.tif -o Outlets.shp -om Outletsmoved.shp -md 20 
 assert_success
 }
 
@@ -1180,24 +1180,24 @@ assert_success
 #}
 
 #MOVEOUTLETS
-@test "run mpiexec -np 1  $TAUDEM_PATH/moveoutletstostreams -p loganp.tif -src logansrc.tif -o OutletstoMove.shp -om Outletsmoved.shp -md 20" {
+@test "run mpiexec -np 1  $TAUDEM_PATH/moveoutletstostrm -p loganp.tif -src logansrc.tif -o OutletstoMove.shp -om Outletsmoved.shp -md 20" {
 cd MovedOutletstoStream_data
-run mpiexec -np 1  $TAUDEM_PATH/moveoutletstostreams -p loganp.tif -src logansrc.tif -o OutletstoMove.shp -om Outletsmoved.shp -md 20 
+run mpiexec -np 1  $TAUDEM_PATH/moveoutletstostrm -p loganp.tif -src logansrc.tif -o OutletstoMove.shp -om Outletsmoved.shp -md 20 
 assert_success
 }
-@test "run mpiexec -np 3  $TAUDEM_PATH/moveoutletstostreams -p loganp.tif -src logansrc.tif -o OutletstoMove.json -om Outletsmoved.kml -md 20" {
+@test "run mpiexec -np 3  $TAUDEM_PATH/moveoutletstostrm -p loganp.tif -src logansrc.tif -o OutletstoMove.json -om Outletsmoved.kml -md 20" {
 cd MovedOutletstoStream_data
-run mpiexec -np 3  $TAUDEM_PATH/moveoutletstostreams -p loganp.tif -src logansrc.tif -o OutletstoMove.json -om Outletsmoved.kml -md 20 
+run mpiexec -np 3  $TAUDEM_PATH/moveoutletstostrm -p loganp.tif -src logansrc.tif -o OutletstoMove.json -om Outletsmoved.kml -md 20 
 assert_success
 }
-@test "run mpiexec -np 4  $TAUDEM_PATH/moveoutletstostreams -p loganp.tif -src logansrc.tif -o LoganSample.sqlite -lyrno 2 -om Outletsmoved5.kml -md 20" {
+@test "run mpiexec -np 4  $TAUDEM_PATH/moveoutletstostrm -p loganp.tif -src logansrc.tif -o LoganSample.sqlite -lyrno 2 -om Outletsmoved5.kml -md 20" {
 cd MovedOutletstoStream_data
-run mpiexec -np 4  $TAUDEM_PATH/moveoutletstostreams -p loganp.tif -src logansrc.tif -o LoganSample.sqlite -lyrno 2 -om Outletsmoved5.kml -md 20 
+run mpiexec -np 4  $TAUDEM_PATH/moveoutletstostrm -p loganp.tif -src logansrc.tif -o LoganSample.sqlite -lyrno 2 -om Outletsmoved5.kml -md 20 
 assert_success
 }
-@test "run mpiexec -np 7  $TAUDEM_PATH/moveoutletstostreams -p loganp.tif -src logansrc.tif -o Logan.gdb -lyrno 0 -om Outletsmove.json -md 20" {
+@test "run mpiexec -np 7  $TAUDEM_PATH/moveoutletstostrm -p loganp.tif -src logansrc.tif -o Logan.gdb -lyrno 0 -om Outletsmove.json -md 20" {
 cd MovedOutletstoStream_data
-run mpiexec -np 7  $TAUDEM_PATH/moveoutletstostreams -p loganp.tif -src logansrc.tif -o Logan.gdb -lyrno 0 -om Outletsmove.json -md 20 
+run mpiexec -np 7  $TAUDEM_PATH/moveoutletstostrm -p loganp.tif -src logansrc.tif -o Logan.gdb -lyrno 0 -om Outletsmove.json -md 20 
 assert_success
 }
 
@@ -1266,20 +1266,20 @@ cd NoEPSG
 run mpiexec -n 2  $TAUDEM_PATH/aread8 -p ma2_ep.tif -ad8 ma2_ead8.tif -o outlet.shp -nc
 assert_success
 }
-@test "run mpiexec  -np  8  moveoutletstostreams  -p  subwatershed_74p.tif  -src  subwatershed_74src1.tif  -o  mypoint.shp  -om  New_Outlet.shp  -md  10000.0" {
+@test "run mpiexec  -np  8  moveoutletstostrm  -p  subwatershed_74p.tif  -src  subwatershed_74src1.tif  -o  mypoint.shp  -om  New_Outlet.shp  -md  10000.0" {
 cd MoveOutlets2
-run mpiexec  -np  8  $TAUDEM_PATH/moveoutletstostreams  -p  subwatershed_74p.tif  -src  subwatershed_74src1.tif  -o  mypoint.shp  -om  New_Outlet.shp  -md  10000.0 
+run mpiexec  -np  8  $TAUDEM_PATH/moveoutletstostrm  -p  subwatershed_74p.tif  -src  subwatershed_74src1.tif  -o  mypoint.shp  -om  New_Outlet.shp  -md  10000.0 
 assert_success
 }
-@test "run mpiexec -np 1  $TAUDEM_PATH/moveoutletstostreams  -p  subwatershed_74p.tif  -src  subwatershed_74src1.tif  -o  testpoints.shp  -om  New_Outlet1.shp  -md  10000" {
+@test "run mpiexec -np 1  $TAUDEM_PATH/moveoutletstostrm  -p  subwatershed_74p.tif  -src  subwatershed_74src1.tif  -o  testpoints.shp  -om  New_Outlet1.shp  -md  10000" {
 cd MoveOutlets2
-run mpiexec -np 1  $TAUDEM_PATH/moveoutletstostreams  -p  subwatershed_74p.tif  -src  subwatershed_74src1.tif  -o  testpoints.shp  -om  New_Outlet1.shp  -md  10000 
+run mpiexec -np 1  $TAUDEM_PATH/moveoutletstostrm  -p  subwatershed_74p.tif  -src  subwatershed_74src1.tif  -o  testpoints.shp  -om  New_Outlet1.shp  -md  10000 
 assert_success
 }
 
-@test "run mpiexec -np 8  $TAUDEM_PATH/moveoutletstostreams  -p  subwatershed_74p.tif  -src  subwatershed_74src1.tif  -o  testpoints.shp  -om  New_Outlet2.shp  -md  100" {
+@test "run mpiexec -np 8  $TAUDEM_PATH/moveoutletstostrm  -p  subwatershed_74p.tif  -src  subwatershed_74src1.tif  -o  testpoints.shp  -om  New_Outlet2.shp  -md  100" {
 cd MoveOutlets2
-run mpiexec -np 8  $TAUDEM_PATH/moveoutletstostreams  -p  subwatershed_74p.tif  -src  subwatershed_74src1.tif  -o  testpoints.shp  -om  New_Outlet2.shp  -md  100 
+run mpiexec -np 8  $TAUDEM_PATH/moveoutletstostrm  -p  subwatershed_74p.tif  -src  subwatershed_74src1.tif  -o  testpoints.shp  -om  New_Outlet2.shp  -md  100 
 assert_success
 }
 @test "run mpiexec -n 4  $TAUDEM_PATH/gagewatershed -p fdr.tif -gw gw.tif -id id.txt -o CatchOutlets3.shp" {

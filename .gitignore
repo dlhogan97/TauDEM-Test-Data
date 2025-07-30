@@ -1,0 +1,14 @@
+*.tif*
+*.dat
+*.shp
+*.prj
+*.shx
+*.dbf
+*.txt
+*.img
+*.bin*
+*.out
+*.json
+*/gridtypes/
+Input/streamnet_data/*
+Input/streamnet_data/LoganSample.sqlite
